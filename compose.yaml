@@ -4,6 +4,7 @@ services:
     environment:
       - 'ACCEPT_EULA=yes'
       - 'MSSQL_PID=express'
-      - 'MSSQL_SA_PASSWORD=verYs3cret'
+      - 'MSSQL_SA_PASSWORD=jksd34kKNlO90Njqpx'
+      - 'MSSQL_DB=musicdb'
     ports:
       - '56283:1433'

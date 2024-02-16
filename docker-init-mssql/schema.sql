@@ -1,3 +1,4 @@
+use musicdb;
 CREATE LOGIN prospring5 WITH PASSWORD = 'KkSLMSnLSO1KJj3JL'
 CREATE USER  prospring5 FOR LOGIN prospring5;
 

@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.2.2'
     id 'io.spring.dependency-management' version '1.1.4'
-    id 'org.hibernate.orm' version '6.4.1.Final'
     id 'org.graalvm.buildtools.native' version '0.9.28'
 }
 
@@ -33,7 +32,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.modulith:spring-modulith-starter-core'
     implementation 'org.springframework.modulith:spring-modulith-starter-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     compileOnly 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
     runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
@@ -41,6 +43,9 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.modulith:spring-modulith-starter-test'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    implementation 'org.apache.commons:commons-dbcp2:2.11.0'
 }
 
 dependencyManagement {
@@ -51,11 +56,5 @@ dependencyManagement {
 
 tasks.named('test') {
     useJUnitPlatform()
-}
-
-hibernate {
-    enhancement {
-        enableAssociationManagement = true
-    }
 }
 
