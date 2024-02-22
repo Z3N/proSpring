@@ -45,7 +45,6 @@ public class JpaConfig {
     @Bean
     public Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
-        hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.SQLServer2022Dialect");
         hibernateProperties.put("hibernate.show_sql", "true");
         hibernateProperties.put("hibernate.format_sql", "true");
         hibernateProperties.put("hibernate.use_sql_comments", true);
@@ -66,7 +65,7 @@ public class JpaConfig {
     @Bean
     public EntityManagerFactory entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-        factoryBean.setPackagesToScan("pro.spring.prospring.ch8.entities");
+        factoryBean.setPackagesToScan("pro.spring.prospring.ch8.entity");
         factoryBean.setDataSource(dataSource());
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         factoryBean.setJpaProperties(hibernateProperties());
