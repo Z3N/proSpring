@@ -2,6 +2,7 @@ package pro.spring.prospring.ch8.service;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.stereotype.Repository;
@@ -30,23 +31,36 @@ public class SingerServiceImpl implements SingerService {
     @Override
     @Transactional(readOnly = true)
     public List<Singer> findAllWithAlbum() {
-        throw new NotImplementedException("findAllWithAlbum() not implemented");
+        List<Singer> singers = entityManager.createNamedQuery(Singer.FIND_ALL_WITH_ALBUM, Singer.class).getResultList();
+        return singers;
     }
 
     @Override
     @Transactional(readOnly = true)
     public Singer findById(Long id) {
-        throw new NotImplementedException("findById() not implemented");
+        TypedQuery<Singer> query = entityManager.createNamedQuery(Singer.FIND_SINGER_BY_ID, Singer.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
     }
 
     @Override
     public Singer save(Singer singer) {
-        throw new NotImplementedException("save() not implemented");
+        if (singer.getId() == null) {
+            log.info("Inserting new singer");
+            entityManager.persist(singer);
+        } else {
+            entityManager.merge(singer);
+            log.info("Updating existing singer");
+        }
+        log.info("Singer saved with id: " + singer.getId());
+        return singer;
     }
 
     @Override
-    public Singer delete(Singer singer) {
-        throw new NotImplementedException("delete() not implemented");
+    public void delete(Singer singer) {
+        Singer mergedSinger = entityManager.merge(singer);
+        entityManager.remove(mergedSinger);
+        log.info("Singer deleted with id: " + singer.getId());
     }
 
     @Override

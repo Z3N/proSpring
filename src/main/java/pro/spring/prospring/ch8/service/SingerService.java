@@ -10,6 +10,6 @@ public interface SingerService {
     List<Singer> findAllWithAlbum();
     Singer findById(Long id);
     Singer save(Singer singer);
-    Singer delete(Singer singer);
+    void delete(Singer singer);
     List<Singer> findAllByNativeQuery();
 }

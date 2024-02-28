@@ -3,6 +3,8 @@ package pro.spring.prospring.ch8.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,6 +12,7 @@ import java.util.Date;
 @Table(name = "ALBUM")
 @Getter
 @Setter
+@ToString
 public class Album implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

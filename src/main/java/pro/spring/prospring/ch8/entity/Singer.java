@@ -1,6 +1,8 @@
 package pro.spring.prospring.ch8.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -20,7 +22,8 @@ import java.util.Set;
         "left join fetch s.instruments i")
 })
 @SqlResultSetMapping(name = "singerResult", entities = @EntityResult(entityClass = Singer.class))
-
+@Getter
+@Setter
 public class Singer implements Serializable {
     public static final String FIND_ALL = "Singer.findAll";
     public static final String FIND_SINGER_BY_ID = "Singer.findById";
@@ -60,5 +63,14 @@ public class Singer implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", birthDate=" + birthDate +
                 '}';
+    }
+
+    public void addAlbum(Album album) {
+        album.setSinger(this);
+        this.getAlbums().add(album);
+    }
+
+    public void removeAlbum(Album album) {
+        this.getAlbums().remove(album);
     }
 }
